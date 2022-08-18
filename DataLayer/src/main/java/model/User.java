@@ -5,6 +5,7 @@ import java.util.List;
 
 public class User extends Entity {
     private int id;
+    private String password;
     private String name;
     private String surname;
     private String email;
@@ -16,15 +17,21 @@ public class User extends Entity {
     private Country nationality;
     private List<UserSkill> skills;
 
+    public User(int id, String email, String password){
+        this.id = id;
+        this.email = email;
+        this.password = password;
+    }
     public User(String name, String surname, String email,
-                String phone){
+                String phone, String password){
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.phone = phone;
+        this.password = password;
     }
-    public User(int id, String name, String surname, String email,
+    public User(int id, String password, String name, String surname, String email,
                 String phone, String profileDescription, String address,
                 Date birthDate, Country birthplace, Country nationality) {
         this.id = id;
@@ -37,8 +44,16 @@ public class User extends Entity {
         this.birthDate = birthDate;
         this.birthplace = birthplace;
         this.nationality = nationality;
+        this.password = password;
     }
+
+    public User() {
+
+    }
+
     //region Getters and Setters
+    public String getPassword(){ return password;}
+    public void setPassword(String password){ this.password = password;}
     public int getId() {
         return id;
     }
@@ -133,9 +148,10 @@ public class User extends Entity {
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", profileDescription='" + profileDescription + '\'' +
                 ", address='" + address + '\'' +

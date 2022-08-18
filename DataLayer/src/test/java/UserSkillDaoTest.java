@@ -24,7 +24,7 @@ public class UserSkillDaoTest {
         UserSkill userSkill = new UserSkill(-1, userDao.get(1), skillDao.get(1),8);
         UserSkillDao userSkillDao = new UserSkillDao();
         int previousSize = userSkillDao.getAll().size();
-        userSkillDao.save(userSkill);
+        userSkillDao.create(userSkill);
         int newSize = userSkillDao.getAll().size();
         assertEquals(previousSize + 1, newSize);
     }

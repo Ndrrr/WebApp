@@ -18,10 +18,10 @@ public class UserDaoTest {
     }
     @Test
     public void testCreateNewUser(){
-        User user = new User("John", "Doe", "doejohn@gmail.com","0712345678");
+        User user = new User("John", "Doe", "doejohn@gmail.com","0712345678", "password");
         UserDao userDao = new UserDao();
         int previousSize = userDao.getAll().size();
-        userDao.save(user);
+        userDao.create(user);
         int newSize = userDao.getAll().size();
         assertEquals(previousSize + 1, newSize);
     }
@@ -36,7 +36,7 @@ public class UserDaoTest {
     }
     @Test
     public void testUpdateUser(){
-        User user = new User("John", "Doe", "doejohn@gmail.com","0712345678");
+        User user = new User("John", "Doe", "doejohn@gmail.com","0712345678", "password");
         user.setAddress("Wild Rift");
         user.setId(3);
         UserDao userDao = new UserDao();

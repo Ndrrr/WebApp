@@ -21,7 +21,7 @@ public class EmploymentHistoryDaoTest {
         EmploymentHistory employmentHistory = new EmploymentHistory(-1, "Google", Date.valueOf( "2019-01-01"), Date.valueOf( "2019-01-01"), "Software Engineer", 1);
         EmploymentHistoryDao employmentHistoryDao = new EmploymentHistoryDao();
         int previousSize = employmentHistoryDao.getAll().size();
-        employmentHistoryDao.save(employmentHistory);
+        employmentHistoryDao.create(employmentHistory);
         int newSize = employmentHistoryDao.getAll().size();
         assertEquals(previousSize + 1, newSize);
     }

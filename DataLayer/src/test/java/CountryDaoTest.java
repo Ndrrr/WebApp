@@ -20,7 +20,7 @@ public class CountryDaoTest {
         Country country = new Country(-1, "England", "UK","British");
         CountryDao countryDao = new CountryDao();
         int previousSize = countryDao.getAll().size();
-        countryDao.save(country);
+        countryDao.create(country);
         int newSize = countryDao.getAll().size();
         assertEquals(previousSize + 1, newSize);
     }

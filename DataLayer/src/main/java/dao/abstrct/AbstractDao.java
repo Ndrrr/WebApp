@@ -13,8 +13,8 @@ public abstract class AbstractDao<T extends Entity> implements Dao<T> {
     protected abstract String[] getEntityFields();
     protected abstract String getTableName();
     @Override
-    public T get(int id) {
-        if(id == 0) return null;
+    public T get(Integer id) {
+        if(id == null || id == 0) return null;
         try (Connection conn = Dao.connect()) {
             PreparedStatement stmt = conn.prepareStatement("select * from " + getTableName() + " where id = ? limit 1");
             stmt.setInt(1, id);
@@ -22,7 +22,7 @@ public abstract class AbstractDao<T extends Entity> implements Dao<T> {
             ResultSet rs = stmt.getResultSet();
             rs.next();
             return getEntityByResultSet(rs);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -39,19 +39,19 @@ public abstract class AbstractDao<T extends Entity> implements Dao<T> {
                 entities.add(getEntityByResultSet(rs));
             }
             return entities;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
     @Override
-    public void save(T t) {
+    public void create(T t) {
         try(Connection conn = Dao.connect()) {
             PreparedStatement stmt = conn.prepareStatement(buildInsertQuery());
             setPreparedStatementWithoutId(t, stmt);
             stmt.execute();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -63,19 +63,20 @@ public abstract class AbstractDao<T extends Entity> implements Dao<T> {
             setPreparedStatementWithoutId(t,stmt);
             stmt.setInt(getEntityFields().length + 1, t.getId());
             stmt.execute();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
+        if(id==null || id == 0) return;
         try(Connection conn = Dao.connect()) {
             PreparedStatement stmt = conn.prepareStatement(
                     "Delete from " +getTableName() + " where id = ?");
             stmt.setInt(1, id);
             stmt.execute();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

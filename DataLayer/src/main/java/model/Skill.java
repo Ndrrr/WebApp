@@ -8,6 +8,8 @@ public class Skill extends Entity {
         this.id = id;
         this.name = name;
     }
+    public Skill(){
+    }
     //region Getters and Setters
 
     public int getId() {

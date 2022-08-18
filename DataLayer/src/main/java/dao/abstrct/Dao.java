@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface Dao<T> {
-    static Connection connect() throws SQLException {
+    static Connection connect() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         String url = "jdbc:mysql://127.0.0.1:3306/resumeappdb";
         String username = "root";
         String password = "password";
@@ -14,13 +15,12 @@ public interface Dao<T> {
         return conn;
     }
 
-    T get(int id);
+    T get(Integer id);
     List<T> getAll();
-    void save(T t);
+    void create(T t);
     void update(T t);
 
-    void delete(int id);
+    void delete(Integer id);
     void delete(T t);
-
 
 }

@@ -20,7 +20,7 @@ public class SkillDaoTest {
         Skill skill = new Skill(-1, "Scala");
         SkillDao skillDao = new SkillDao();
         int previousSize = skillDao.getAll().size();
-        skillDao.save(skill);
+        skillDao.create(skill);
         int newSize = skillDao.getAll().size();
         assertEquals(previousSize + 1, newSize);
     }

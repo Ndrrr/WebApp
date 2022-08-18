@@ -11,6 +11,7 @@ public final class UserDao extends AbstractDao<User> {
     protected User getEntityByResultSet(ResultSet rs) throws SQLException {
         CountryDao countryDao =  new CountryDao();
         int userId = rs.getInt("id");
+        String password = rs.getString("password");
         String firstName = rs.getString("name");
         String lastName = rs.getString("surname");
         String email = rs.getString("email");
@@ -22,7 +23,7 @@ public final class UserDao extends AbstractDao<User> {
         int nationality_id = rs.getInt("nationality_id");
         Country birthplace = countryDao.get(country_id);
         Country nationality = countryDao.get(nationality_id);
-        return  new User(userId,firstName,lastName,email,phone,profileDescription,address,birthDate,birthplace,nationality);
+        return new User(userId,password,firstName,lastName,email,phone,profileDescription,address,birthDate,birthplace,nationality);
     }
 
     @Override
@@ -34,21 +35,22 @@ public final class UserDao extends AbstractDao<User> {
     protected PreparedStatement setPreparedStatementWithoutId(User u, PreparedStatement stmt) throws SQLException{
         Country brthplc = u.getBirthplace();
         Country nationality = u.getNationality();
-        stmt.setString(1, u.getName());
-        stmt.setString(2, u.getSurname());
-        stmt.setString(3, u.getEmail());
-        stmt.setString(4, u.getPhone());
-        stmt.setString(5, u.getProfileDescription());
-        stmt.setString(6, u.getAddress());
-        stmt.setDate(7, u.getBirthDate());
-        stmt.setObject(8, brthplc!=null ? u.getBirthplace().getId() : null);
-        stmt.setObject(9, nationality!=null ? u.getNationality().getId() : null);
+        stmt.setString(1, u.getPassword());
+        stmt.setString(2, u.getName());
+        stmt.setString(3, u.getSurname());
+        stmt.setString(4, u.getEmail());
+        stmt.setString(5, u.getPhone());
+        stmt.setString(6, u.getProfileDescription());
+        stmt.setString(7, u.getAddress());
+        stmt.setDate(8, u.getBirthDate());
+        stmt.setObject(9, brthplc!=null ? u.getBirthplace().getId() : null);
+        stmt.setObject(10, nationality!=null ? u.getNationality().getId() : null);
         return stmt;
     }
 
     protected String[] getEntityFields(){
         return new String[]{
-                "name", "surname", "email", "phone", "profile_description", "address", "birthDate", "birthplace_id", "nationality_id"
+                "password", "name", "surname", "email", "phone", "profile_description", "address", "birthDate", "birthplace_id", "nationality_id"
         };
     }
 

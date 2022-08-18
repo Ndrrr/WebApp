@@ -5,7 +5,6 @@ public class Country extends Entity {
     private String name;
     private String code;
     private String nationality;
-
     public Country() {
     }
 
