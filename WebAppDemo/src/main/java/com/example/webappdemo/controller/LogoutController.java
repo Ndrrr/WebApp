@@ -7,8 +7,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "CommonServlet", value = "/common")
-public class CommonServlet extends HttpServlet {
+@WebServlet(name = "LogoutController", value = "/logout")
+public class LogoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");

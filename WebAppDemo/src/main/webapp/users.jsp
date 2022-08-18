@@ -18,7 +18,7 @@
     </head>
     <body>
     <p >Logged in as: <%=currentUser!=null? currentUser.getName():empty %></p>
-        <form method="post" action="common">
+        <form method="post" action="logout">
             <button type="submit" class="btn btn-primary" name="action" value="logout">Logout</button>
         </form>
         <div class="container">
